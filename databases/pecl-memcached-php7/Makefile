@@ -1,7 +1,7 @@
 # Created by: Gea-Suan Lin <gslin@gslin.org>
 # $FreeBSD: head/databases/pecl-memcached/Makefile 413836 2016-04-23 06:48:42Z sunpoet $
 
-PORTNAME=	memcached-php7
+PORTNAME=	memcached
 PORTVERSION=    php7	
 PORTREVISION=	3
 CATEGORIES=	databases
