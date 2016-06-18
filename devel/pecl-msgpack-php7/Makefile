@@ -3,9 +3,11 @@
 
 PORTNAME=	msgpack
 PORTVERSION=	2.0.1
+
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
+PKGNAMESUFFIX=  php7
 DIST_SUBDIR=	PECL
 
 MAINTAINER=	mb@lunetics.com

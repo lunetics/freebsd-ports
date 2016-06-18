@@ -6,6 +6,7 @@ PORTVERSION=	0.5.7
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
+PKGNAMESUFFIX=  php5
 DIST_SUBDIR=	PECL
 
 MAINTAINER=	mb@lunetics.com
