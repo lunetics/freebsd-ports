@@ -7,6 +7,7 @@ PORTREVISION=	3
 CATEGORIES=	databases
 #MASTER_SITES=	https://github.com/php-memcached-dev/php-memcached/archive/
 PKGNAMEPREFIX=	pecl-
+PKGNAMESUFFIX=	php7
 DIST_SUBDIR=	PECL
 
 USE_GITHUB= yes
