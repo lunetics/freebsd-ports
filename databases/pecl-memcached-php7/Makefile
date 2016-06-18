@@ -2,7 +2,7 @@
 # $FreeBSD: head/databases/pecl-memcached/Makefile 413836 2016-04-23 06:48:42Z sunpoet $
 
 PORTNAME=	memcached
-PORTVERSION=    php7
+PORTVERSION=    a8ed240
 PORTREVISION=	3
 CATEGORIES=	databases
 #MASTER_SITES=	https://github.com/php-memcached-dev/php-memcached/archive/
