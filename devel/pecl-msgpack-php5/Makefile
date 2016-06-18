@@ -3,10 +3,11 @@
 
 PORTNAME=	msgpack
 PORTVERSION=	0.5.7
+
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
-PKGNAMESUFFIX=  php5
+PKGNAMESUFFIX=  -php5
 DIST_SUBDIR=	PECL
 
 MAINTAINER=	mb@lunetics.com
@@ -18,5 +19,7 @@ USES=		tar:tgz
 USE_PHP=	session
 USE_PHPEXT=	yes
 USE_PHP_BUILD=	yes
+
+IGNORE_WITH_PHP=	70
 
 .include <bsd.port.mk>

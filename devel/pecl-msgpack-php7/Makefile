@@ -7,7 +7,7 @@ PORTVERSION=	2.0.1
 CATEGORIES=	devel
 MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
-PKGNAMESUFFIX=  php7
+PKGNAMESUFFIX=  -php7
 DIST_SUBDIR=	PECL
 
 MAINTAINER=	mb@lunetics.com
@@ -19,5 +19,8 @@ USES=		tar:tgz
 USE_PHP=	session
 USE_PHPEXT=	yes
 USE_PHP_BUILD=	yes
+
+IGNORE_WITH_PHP= 55 56
+
 
 .include <bsd.port.mk>
