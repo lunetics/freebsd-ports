@@ -35,7 +35,6 @@ IGBINARY_DESC=  Binary serializer support
 MSGPACK_DESC= Msgpack support
 
 CONFIGURE_ARGS= --with-libmemcached-dir=${LOCALBASE}
-IGNORE_WITH_PHP=70
 USE_PHP= session
 USE_PHPEXT= yes
 USE_PHPIZE= yes
