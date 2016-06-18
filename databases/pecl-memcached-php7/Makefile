@@ -46,7 +46,7 @@ IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
 IGBINARY_USE=       PHP=igbinary
 SASL_CONFIGURE_ENABLE=  memcached-sasl
 SASL_LIB_DEPENDS=   libsasl2.so:security/cyrus-sasl2
-MGSPACK_CONFIGURE_ENABLE= memcached-msgpack
+MSGPACK_CONFIGURE_ENABLE= memcached-msgpack
 MSGPACK_USE= PHP=msgpack
 
 JSON_CONFIGURE_ENABLE= memcached-json
