@@ -306,7 +306,7 @@ memcached_DEPENDS= databases/pecl-memcached
 .endif
 mhash_DEPENDS=	security/php${PHP_VER}-mhash
 .if ${PHP_VER} == 70
-msgpack_DEPENDS= devel/pecl-msgpack-php${PHP_VER}
+msgpack_DEPENDS= devel/pecl-msgpack-php7
 .else
 msgpack_DEPENDS= devel/pecl-msgpack-php5
 .endif
