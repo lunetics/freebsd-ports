@@ -23,6 +23,7 @@ USE_PHP_BUILD=  yes
 USE_PHPIZE=     yes
 USE_PHPEXT=     yes
 USES=           tar:tgz
+IGNORE_WITH_PHP= 55 56
 PHP_MODNAME=    ${PORTNAME:tl}
 WRKSRC=         ${WRKDIR}/${PORTNAME:tl}-${PORTVERSION}
 
