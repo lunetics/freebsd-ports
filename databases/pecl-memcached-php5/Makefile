@@ -1,20 +1,16 @@
-# Created by: Matthias Breddin <mb@lunetics.com>
+# Created by: Gea-Suan Lin <gslin@gslin.org>
 # $FreeBSD$
 
 PORTNAME=	memcached
-PORTVERSION=    3.0.0b1
+PORTVERSION=	2.2.0
 PORTREVISION=	3
 CATEGORIES=	databases
+MASTER_SITES=	http://pecl.php.net/get/
 PKGNAMEPREFIX=	pecl-
-PKGNAMESUFFIX=	-php7
+PKGNAMESUFFIX= -php7
 DIST_SUBDIR=	PECL
 
-USE_GITHUB= yes
-GH_ACCOUNT= php-memcached-dev
-GH_PROJECT= php-memcached
-GH_TAGNAME= a8ed240
-
-MAINTAINER=	mb@lunetics.com
+MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	PHP extension for interfacing with memcached via libmemcached library
 
 LICENSE=	PHP30
@@ -29,17 +25,18 @@ OPTIONS_DEFINE= IGBINARY \
                 MSGPACK \
                 JSON
 
-OPTIONS_DEFAULT=JSON
+OPTIONS_DEFAULT=JSON                
 
-IGBINARY_DESC=  Binary serializer support
+IGBINARY_DESC=	Binary serializer support
 MSGPACK_DESC= Msgpack support
 
-CONFIGURE_ARGS= --with-libmemcached-dir=${LOCALBASE}
+CONFIGURE_ARGS=	--with-libmemcached-dir=${LOCALBASE}
+IGNORE_WITH_PHP=70
 USE_PHP= session
-USE_PHPEXT= yes
-USE_PHPIZE= yes
-USE_PHP_BUILD=  yes
-USES=       pkgconfig tar:tgz
+USE_PHPEXT=	yes
+USE_PHPIZE=	yes
+USE_PHP_BUILD=	yes
+USES=		pkgconfig tar:tgz
 
 IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
 IGBINARY_USE=       PHP=igbinary
