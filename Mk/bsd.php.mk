@@ -282,7 +282,11 @@ gettext_DEPENDS=devel/php${PHP_VER}-gettext
 gmp_DEPENDS=	math/php${PHP_VER}-gmp
 hash_DEPENDS=	security/php${PHP_VER}-hash
 iconv_DEPENDS=	converters/php${PHP_VER}-iconv
+.if ${PHP_VER} == 70
+igbinary_DEPENDS=	converters/pecl-igbinary-php7
+.else
 igbinary_DEPENDS=	converters/pecl-igbinary
+.endif
 imap_DEPENDS=	mail/php${PHP_VER}-imap
 interbase_DEPENDS=	databases/php${PHP_VER}-interbase
 .if ${PHP_VER} == 70
