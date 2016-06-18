@@ -20,7 +20,7 @@ USE_PHP=	session
 USE_PHPEXT=	yes
 USE_PHP_BUILD=	yes
 
+PHP_DEFAULT= 7.0
 IGNORE_WITH_PHP= 55 56
-
 
 .include <bsd.port.mk>
