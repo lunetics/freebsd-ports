@@ -14,8 +14,6 @@ GH_ACCOUNT= php-memcached-dev
 GH_PROJECT= php-memcached
 GH_TAGNAME= a8ed240
 
-
-
 MAINTAINER=	sunpoet@FreeBSD.org
 COMMENT=	PHP extension for interfacing with memcached via libmemcached library
 
@@ -26,20 +24,32 @@ LIB_DEPENDS=	libmemcached.so:databases/libmemcached
 
 BROKEN_powerpc64=	does not build
 
-OPTIONS_DEFINE=	IGBINARY SASL
-IGBINARY_DESC=	Binary serializer support
+OPTIONS_DEFINE= IGBINARY \
+                SASL \
+                MSGPACK \
+                JSON
 
-CONFIGURE_ARGS=	--with-libmemcached-dir=${LOCALBASE}
-USE_PHP=	json session
-USE_PHPEXT=	yes
-USE_PHPIZE=	yes
-USE_PHP_BUILD=	yes
-USES=		pkgconfig tar:tgz
+OPTIONS_DEFAULT=JSON
 
-IGBINARY_CONFIGURE_ENABLE=	memcached-igbinary
-IGBINARY_USE=		PHP=igbinary
-SASL_CONFIGURE_ENABLE=	memcached-sasl
-SASL_LIB_DEPENDS=	libsasl2.so:security/cyrus-sasl2
+IGBINARY_DESC=  Binary serializer support
+MSGPACK_DESC= Msgpack support
+
+CONFIGURE_ARGS= --with-libmemcached-dir=${LOCALBASE}
+IGNORE_WITH_PHP=70
+USE_PHP= session
+USE_PHPEXT= yes
+USE_PHPIZE= yes
+USE_PHP_BUILD=  yes
+USES=       pkgconfig tar:tgz
+
+IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
+IGBINARY_USE=       PHP=igbinary
+SASL_CONFIGURE_ENABLE=  memcached-sasl
+SASL_LIB_DEPENDS=   libsasl2.so:security/cyrus-sasl2
+MGSPACK_CONFIGURE_ENABLE= memcached-msgpack
+MSGPACK_USE= PHP=msgpack
+
+JSON_CONFIGURE_ENABLE= memcached-json
+JSON_USE= PHP=json
 
 .include <bsd.port.mk>
-
