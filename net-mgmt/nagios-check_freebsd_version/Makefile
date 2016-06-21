@@ -14,6 +14,8 @@ GH_ACCOUNT= frlen
 GH_PROJECT= nagios-plugins
 GH_TAGNAME= c7cb236
 
+PLIST_FILES= libexec/nagios/check_freebsd_version
+
 NO_BUILD=   yes
 
 .include <bsd.port.options.mk>
