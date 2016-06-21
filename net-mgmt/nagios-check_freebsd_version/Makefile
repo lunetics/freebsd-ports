@@ -23,7 +23,7 @@ IGNORE= supported for FreeBSD 10.x only
 .endif
 
 do-install:
-    @${MKDIR} ${STAGEDIR}${PREFIX}/libexec/nagios
-    ${INSTALL_SCRIPT} ${WRKSRC}/check_freebsd_version ${STAGEDIR}${PREFIX}/libexec/nagios/
+	@${MKDIR} ${STAGEDIR}${PREFIX}/libexec/nagios
+	${INSTALL_SCRIPT} ${WRKSRC}/check_freebsd_version ${STAGEDIR}${PREFIX}/libexec/nagios/
 
 .include <bsd.port.mk>
