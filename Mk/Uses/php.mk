@@ -1,4 +1,4 @@
-# $FreeBSD: head/Mk/Uses/php.mk 417720 2016-06-28 14:00:58Z mat $
+# $FreeBSD: head/Mk/Uses/php.mk 417764 2016-06-29 13:31:35Z mat $
 #
 # Support for PHP-based ports.
 #
@@ -392,8 +392,8 @@ zlib_DEPENDS=	archivers/php${PHP_VER}-zlib
 
 .    for extension in ${USE_PHP}
 ext=		${extension}
-.      if ${_USE_PHP_VER${PHP_VER}:M${ext:S/:build//}} != ""
-.        if ${PHP_EXT_INC:M${extension:S/:build//}} == ""
+.      if !empty(_USE_PHP_VER${PHP_VER}:M${extension:S/:build//})
+.        if empty(PHP_EXT_INC:M${extension:S/:build//})
 .          if !empty(php_ARGS:Mbuild) || !empty(ext:M*\:build)
 BUILD_DEPENDS+=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/${extension:S/:build//}.so:${${extension:S/:build//}_DEPENDS}
 .          endif
