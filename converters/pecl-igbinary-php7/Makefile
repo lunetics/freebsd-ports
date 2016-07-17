@@ -11,7 +11,7 @@ DIST_SUBDIR=	PECL
 USE_GITHUB= yes
 GH_ACCOUNT= igbinary
 GH_PROJECT= igbinary7
-GH_TAGNAME= 2b7c703
+GH_TAGNAME= a87a993
 
 
 MAINTAINER=	mb@lunetics.com
@@ -22,10 +22,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 PHP_DEFAULT= 7.0 
 IGNORE_WITH_PHP= 55 56
-USE_PHP=	session
-USE_PHP_BUILD=	yes
-USE_PHPEXT=	yes
-USE_PHPIZE=	yes
-USES=		tar:tgz
+USE_PHP=	session:build
+USES=		php:ext tar:tgz
 
 .include <bsd.port.mk>
