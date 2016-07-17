@@ -18,12 +18,11 @@ BUILD_DEPENDS=      ${LOCALBASE}/lib/php/20151012/apcu.so:devel/pecl-APCu-php7
 CONFLICTS=          pecl-APC-[0-9]*
 
 CFLAGS+=            -I${LOCALBASE}/include
+
 USE_PHP=            apcu
-USE_PHP_BUILD=      yes
-USE_PHPIZE=         yes
-USE_PHPEXT=         yes
+USES=               php:phpize php:ext tar:tgz
+
 IGNORE_WITH_PHP=    55 56
-USES=               tar:tgz
 PHP_MODNAME=        apc
 WRKSRC=             ${WRKDIR}/${PORTNAME:tl}-${PORTVERSION}
 
