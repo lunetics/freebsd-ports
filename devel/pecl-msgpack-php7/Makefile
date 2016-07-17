@@ -15,10 +15,7 @@ COMMENT=	PHP extension for interfacing with MessagePack
 
 LICENSE=	BSD3CLAUSE
 
-USES=		tar:tgz
-USE_PHP=	session
-USE_PHPEXT=	yes
-USE_PHP_BUILD=	yes
+USES=   php:session php:phpize php:ext tar:tgz
 
 PHP_DEFAULT= 7.0
 IGNORE_WITH_PHP= 55 56
