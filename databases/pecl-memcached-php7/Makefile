@@ -35,19 +35,17 @@ IGBINARY_DESC=  Binary serializer support
 MSGPACK_DESC= Msgpack support
 
 CONFIGURE_ARGS= --with-libmemcached-dir=${LOCALBASE}
-USE_PHP= session
-USE_PHPEXT= yes
-USE_PHPIZE= yes
-USE_PHP_BUILD=  yes
-USES=       pkgconfig tar:tgz
+
+USE_PHP=    php:session
+USES=       php:phpize pkgconfig php:ext tar:tgz
 
 IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
-IGBINARY_USE=       PHP=igbinary
+IGBINARY_USE=       PHP=igbinary:build
 SASL_CONFIGURE_ENABLE=  memcached-sasl
 SASL_LIB_DEPENDS=   libsasl2.so:security/cyrus-sasl2
 MSGPACK_CONFIGURE_ENABLE= memcached-msgpack
-MSGPACK_USE= PHP=msgpack
+MSGPACK_USE= PHP=msgpack:build
 JSON_CONFIGURE_ENABLE= memcached-json
-JSON_USE= PHP=json
+JSON_USE= PHP=json:build
 
 .include <bsd.port.mk>
