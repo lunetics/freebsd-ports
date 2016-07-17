@@ -24,6 +24,6 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 PHP_DEFAULT= 7.0 
 IGNORE_WITH_PHP= 55 56
 USE_PHP=	session:build
-USES=		php:phpize php:ext pkgconfig tar:tgz
+USES=		php:ext tar:tgz
 
 .include <bsd.port.mk>
