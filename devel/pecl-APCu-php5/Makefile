@@ -18,12 +18,8 @@ LICENSE=			PHP301
 CONFLICTS=			pecl-APC-[0-9]*
 
 CFLAGS+=			-I${LOCALBASE}/include
-USE_PHP=			yes
-USE_PHP_BUILD=		yes
-USE_PHPIZE=			yes
-USE_PHPEXT=			yes
+USES=           php php:phpize php:ext tar:tgz
 IGNORE_WITH_PHP=	70
-USES=				tar:tgz
 PHP_MODNAME=		${PORTNAME:tl}
 WRKSRC=				${WRKDIR}/${PORTNAME:tl}-${PORTVERSION}
 
