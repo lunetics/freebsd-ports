@@ -36,7 +36,7 @@ MSGPACK_DESC= Msgpack support
 
 CONFIGURE_ARGS= --with-libmemcached-dir=${LOCALBASE}
 
-USE_PHP=    php:session
+USE_PHP=    session:build
 USES=       php:phpize pkgconfig php:ext tar:tgz
 
 IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
