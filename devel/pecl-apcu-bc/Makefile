@@ -18,7 +18,7 @@ BUILD_DEPENDS=      ${LOCALBASE}/lib/php/20151012/apcu.so:devel/pecl-APCu-php7
 CONFLICTS=          pecl-APC-[0-9]*
 
 CFLAGS+=            -I${LOCALBASE}/include
-USE_PHP=            yes
+USE_PHP=            apcu
 USE_PHP_BUILD=      yes
 USE_PHPIZE=         yes
 USE_PHPEXT=         yes

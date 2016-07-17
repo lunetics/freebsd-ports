@@ -277,7 +277,7 @@ php-ini:
 # Extensions
 .  if defined(USE_PHP) && ${USE_PHP:tl} != "yes"
 # non-version specific components
-_USE_PHP_ALL=	apc bcmath bitset bz2 calendar ctype curl dba dom \
+_USE_PHP_ALL=	apc apcu bcmath bitset bz2 calendar ctype curl dba dom \
 		exif fileinfo filter ftp gd gettext gmp \
 		hash iconv igbinary imap interbase intl json ldap mbstring mcrypt \
 		memcache mysqli odbc opcache \
@@ -292,6 +292,11 @@ _USE_PHP_VER56=	${_USE_PHP_ALL} mssql mysql sybase_ct
 _USE_PHP_VER70=	${_USE_PHP_ALL}
 
 apc_DEPENDS=	www/pecl-APC
+.if ${PHP_VER} == 70
+apcu_DEPENDS= devel/pecl-APCu-php7
+.    else
+apcu_DEPENDS= devel/pecl-APCu-php5
+.    endif
 bcmath_DEPENDS=	math/php${PHP_VER}-bcmath
 .    if ${PHP_VER} == 70
 bitset_DEPENDS=	math/pecl-bitset
