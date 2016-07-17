@@ -3,7 +3,7 @@
 
 PORTNAME=       APCu
 PORTVERSION=    5.1.5
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=     devel
 MASTER_SITES=   http://pecl.php.net/get/
 PKGNAMEPREFIX=  pecl-
@@ -20,10 +20,9 @@ CONFLICTS=      pecl-APC-[0-9]*
 
 CFLAGS+=        -I${LOCALBASE}/include
 
-USES=           php php:ext pkgconfig tar:tgz
+USES=           php:ext tar:tgz
 
 IGNORE_WITH_PHP= 55 56
 PHP_MODNAME=    ${PORTNAME:tl}
-WRKSRC=         ${WRKDIR}/${PORTNAME:tl}-${PORTVERSION}
 
 .include <bsd.port.mk>

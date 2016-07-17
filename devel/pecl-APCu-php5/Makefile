@@ -3,6 +3,7 @@
 
 PORTNAME=			APCu
 PORTVERSION=		4.0.10
+PORTREVISION=	1
 CATEGORIES=			devel
 MASTER_SITES=		http://pecl.php.net/get/
 PKGNAMEPREFIX=		pecl-
@@ -18,7 +19,8 @@ LICENSE=			PHP301
 CONFLICTS=			pecl-APC-[0-9]*
 
 CFLAGS+=			-I${LOCALBASE}/include
-USES=           php php:phpize php:ext tar:tgz
+USES=           php:ext tar:tgz
+
 IGNORE_WITH_PHP=	70
 PHP_MODNAME=		${PORTNAME:tl}
 WRKSRC=				${WRKDIR}/${PORTNAME:tl}-${PORTVERSION}
