@@ -1,4 +1,4 @@
-# $FreeBSD: head/Mk/Uses/php.mk 417764 2016-06-29 13:31:35Z mat $
+# $FreeBSD: head/Mk/Uses/php.mk 418854 2016-07-20 20:29:07Z bdrewery $
 #
 # Support for PHP-based ports.
 #
@@ -123,7 +123,7 @@ PHP_EXT_INC?=	""
 .    for VER in ${IGNORE_WITH_PHP}
 .      if ${PHP_VER} == "${VER}"
 IGNORE=		cannot be installed: doesn't work with lang/php${PHP_VER} port\
-		(doesn't support PHP ${IGNORE_WITH_PHP:C/^5/5./})
+		(doesn't support PHP ${IGNORE_WITH_PHP:C/^([57])/\1./})
 .      endif
 .    endfor
 .  endif
