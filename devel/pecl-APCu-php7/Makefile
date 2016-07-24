@@ -20,7 +20,7 @@ CONFLICTS=      pecl-APC-[0-9]*
 
 CFLAGS+=        -I${LOCALBASE}/include
 
-USES=           php:ext tar:tgz
+USES=           php:ext pkgconfig tar:tgz
 
 IGNORE_WITH_PHP= 55 56
 PHP_MODNAME=    ${PORTNAME:tl}

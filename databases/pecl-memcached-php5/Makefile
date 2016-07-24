@@ -34,7 +34,7 @@ CONFIGURE_ARGS=	--with-libmemcached-dir=${LOCALBASE}
 IGNORE_WITH_PHP=70
 
 USE_PHP=    session:build
-USES=       php:phpize pkgconfig php:ext tar:tgz
+USES=       php:ext pkgconfig tar:tgz
 
 IGBINARY_CONFIGURE_ENABLE=  memcached-igbinary
 IGBINARY_USE=       PHP=igbinary:build

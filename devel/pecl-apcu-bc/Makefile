@@ -20,7 +20,7 @@ CONFLICTS=          pecl-APC-[0-9]*
 CFLAGS+=            -I${LOCALBASE}/include
 
 USE_PHP=            apcu
-USES=               php:phpize php:ext tar:tgz
+USES=               php:ext pkgconfig tar:tgz
 
 IGNORE_WITH_PHP=    55 56
 PHP_MODNAME=        apc
