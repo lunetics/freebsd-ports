@@ -1,4 +1,4 @@
-# $FreeBSD: head/Mk/Uses/php.mk 419515 2016-08-03 12:48:59Z mat $
+# $FreeBSD: head/Mk/Uses/php.mk 420242 2016-08-15 15:28:03Z mat $
 #
 # Support for PHP-based ports.
 #
@@ -288,7 +288,7 @@ add-plist-phpext:
 # Extensions
 .  if defined(USE_PHP) && ${USE_PHP:tl} != "yes"
 # non-version specific components
-_USE_PHP_ALL=	apc apcu bcmath bitset bz2 calendar ctype curl dba dom \
+_USE_PHP_ALL=   apcu bcmath bitset bz2 calendar ctype curl dba dom \
 		exif fileinfo filter ftp gd gettext gmp \
 		hash iconv igbinary imap interbase intl json ldap mbstring mcrypt \
 		memcache msgpack mysqli odbc opcache \
