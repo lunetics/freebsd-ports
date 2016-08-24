@@ -1,4 +1,4 @@
-# $FreeBSD: head/Mk/Uses/php.mk 420242 2016-08-15 15:28:03Z mat $
+# $FreeBSD: head/Mk/Uses/php.mk 420657 2016-08-23 10:54:49Z amdmi3 $
 #
 # Support for PHP-based ports.
 #
@@ -321,6 +321,7 @@ curl_DEPENDS=	ftp/php${PHP_VER}-curl
 dba_DEPENDS=	databases/php${PHP_VER}-dba
 dbase_DEPENDS=	databases/php${PHP_VER}-dbase
 dom_DEPENDS=	textproc/php${PHP_VER}-dom
+enchant_DEPENDS=	textproc/php${PHP_VER}-enchant
 exif_DEPENDS=	graphics/php${PHP_VER}-exif
 fileinfo_DEPENDS=	sysutils/php${PHP_VER}-fileinfo
 filter_DEPENDS=	security/php${PHP_VER}-filter
