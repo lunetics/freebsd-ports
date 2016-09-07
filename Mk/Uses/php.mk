@@ -1,4 +1,4 @@
-# $FreeBSD: head/Mk/Uses/php.mk 420657 2016-08-23 10:54:49Z amdmi3 $
+# : head/Mk/Uses/php.mk 421478 2016-09-07 07:17:37Z mat $
 #
 # Support for PHP-based ports.
 #
