@@ -1,4 +1,4 @@
-# : head/Mk/Uses/php.mk 421478 2016-09-07 07:17:37Z mat $
+# $FreeBSD: head/Mk/Uses/php.mk 434414 2017-02-19 20:25:58Z sunpoet $
 #
 # Support for PHP-based ports.
 #
@@ -102,14 +102,14 @@ DEFAULT_PHP_VER?=	${PHP_DEFAULT:S/.//}
 # When adding a version, please keep the comment in
 # Mk/bsd.default-versions.mk in sync.
 PHP_VER?=	${DEFAULT_PHP_VER}
-.    if ${PHP_VER} == 70
+.    if ${PHP_VER} == 71
+PHP_EXT_DIR=   20160303
+PHP_EXT_INC=    pcre spl
+.    elif ${PHP_VER} == 70
 PHP_EXT_DIR=   20151012
 PHP_EXT_INC=    pcre spl
 .    elif ${PHP_VER} == 56
 PHP_EXT_DIR=	20131226
-PHP_EXT_INC=	pcre spl
-.    elif ${PHP_VER} == 55
-PHP_EXT_DIR=	20121212
 PHP_EXT_INC=	pcre spl
 .    else
 # (rene) default to DEFAULT_VERSIONS
@@ -139,6 +139,7 @@ PHP_EXT_INC?=	""
 .  if defined(IGNORE_WITH_PHP)
 .    for VER in ${IGNORE_WITH_PHP}
 .      if ${PHP_VER} == "${VER}"
+_IGNORE_PHP_SET=
 IGNORE=		cannot be installed: doesn't work with lang/php${PHP_VER} port\
 		(doesn't support PHP ${IGNORE_WITH_PHP:C/^([57])/\1./})
 .      endif
@@ -191,7 +192,8 @@ RUN_DEPENDS+=	${PHPBASE}/include/php/main/php.h:${PHP_PORT}
 .  if  ${php_ARGS:Mmod} || (${php_ARGS:Mweb} && defined(PHP_VERSION) && ${PHP_SAPI:Mcgi} == "" && ${PHP_SAPI:Mfpm} == "")
 USE_APACHE_RUN=	22+
 .include "${PORTSDIR}/Mk/bsd.apache.mk"
-RUN_DEPENDS+=	${PHPBASE}/${APACHEMODDIR}/libphp5.so:${MOD_PHP_PORT}
+# libphpX.so only has the major version number in it, so remove the last digit of PHP_VER to get it.
+RUN_DEPENDS+=	${PHPBASE}/${APACHEMODDIR}/libphp${PHP_VER:C/.$//}.so:${MOD_PHP_PORT}
 .  endif
 
 PLIST_SUB+=	PHP_EXT_DIR=${PHP_EXT_DIR}
@@ -245,8 +247,8 @@ do-install:
 		@${INSTALL_DATA} ${WRKSRC}/${header}/*.h \
 			${STAGEDIR}${PREFIX}/include/php/ext/${PHP_MODNAME}/${header}
 .    endfor
-	@${RM} -f ${STAGEDIR}${PREFIX}/include/php/ext/${PHP_MODNAME}/config.h
-	@${GREP} "#define \(COMPILE\|HAVE\|USE\)_" ${WRKSRC}/config.h \
+	@${RM} ${STAGEDIR}${PREFIX}/include/php/ext/${PHP_MODNAME}/config.h
+	@${EGREP} "#define (COMPILE|HAVE|USE)_" ${WRKSRC}/config.h \
 		> ${STAGEDIR}${PREFIX}/include/php/ext/${PHP_MODNAME}/config.h
 	@${MKDIR} ${STAGEDIR}${PREFIX}/etc/php
 .    if ${php_ARGS:Mzend}
@@ -267,7 +269,7 @@ add-plist-phpext:
 		>> ${TMPPLIST}
 	@${ECHO_CMD} "@unexec grep -v ext/${PHP_MODNAME}/config.h %D/include/php/ext/php_config.h.orig > %D/include/php/ext/php_config.h || true" \
 		>> ${TMPPLIST}
-	@${ECHO_CMD} "@unexec rm %D/include/php/ext/php_config.h.orig" \
+	@${ECHO_CMD} "@unexec ${RM} %D/include/php/ext/php_config.h.orig" \
 		>> ${TMPPLIST}
 	@${ECHO_CMD} "${PHP_EXT_INI_FILE}" \
 		>> ${TMPPLIST}
@@ -288,28 +290,22 @@ add-plist-phpext:
 # Extensions
 .  if defined(USE_PHP) && ${USE_PHP:tl} != "yes"
 # non-version specific components
-_USE_PHP_ALL=   apcu bcmath bitset bz2 calendar ctype curl dba dom \
-		exif fileinfo filter ftp gd gettext gmp \
+_USE_PHP_ALL=	bcmath bitset bz2 calendar ctype curl dba dom \
+		enchant exif fileinfo filter ftp gd gettext gmp \
 		hash iconv igbinary imap interbase intl json ldap mbstring mcrypt \
-		memcache msgpack mysqli odbc opcache \
+		memcache memcached mysqli odbc opcache \
 		openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql \
 		pdo_odbc pdo_pgsql pdo_sqlite phar pgsql posix \
 		pspell radius readline recode redis session shmop simplexml snmp soap\
 		sockets spl sqlite3 sysvmsg sysvsem sysvshm \
 		tidy tokenizer wddx xml xmlreader xmlrpc xmlwriter xsl zip zlib
 # version specific components
-_USE_PHP_VER55=	${_USE_PHP_ALL} mssql mysql sybase_ct
 _USE_PHP_VER56=	${_USE_PHP_ALL} mssql mysql sybase_ct
 _USE_PHP_VER70=	${_USE_PHP_ALL}
+_USE_PHP_VER71=	${_USE_PHP_ALL}
 
-apc_DEPENDS=	www/pecl-APC
-.if ${PHP_VER} == 70
-apcu_DEPENDS= devel/pecl-APCu-php7
-.    else
-apcu_DEPENDS= devel/pecl-APCu-php5
-.    endif
 bcmath_DEPENDS=	math/php${PHP_VER}-bcmath
-.    if ${PHP_VER} == 70
+.    if ${PHP_VER} == 70 || ${PHP_VER} == 71
 bitset_DEPENDS=	math/pecl-bitset
 .    else
 bitset_DEPENDS=	math/pecl-bitset2
@@ -331,14 +327,10 @@ gettext_DEPENDS=devel/php${PHP_VER}-gettext
 gmp_DEPENDS=	math/php${PHP_VER}-gmp
 hash_DEPENDS=	security/php${PHP_VER}-hash
 iconv_DEPENDS=	converters/php${PHP_VER}-iconv
-.if ${PHP_VER} == 70
-igbinary_DEPENDS=	converters/pecl-igbinary-php7
-.else
 igbinary_DEPENDS=	converters/pecl-igbinary
-.endif
 imap_DEPENDS=	mail/php${PHP_VER}-imap
 interbase_DEPENDS=	databases/php${PHP_VER}-interbase
-.    if ${PHP_VER} == 70
+.    if ${PHP_VER} == 70 || ${PHP_VER} == 71
 intl_DEPENDS=	devel/php${PHP_VER}-intl
 .    else
 intl_DEPENDS=	devel/pecl-intl
@@ -347,18 +339,16 @@ json_DEPENDS=	devel/php${PHP_VER}-json
 ldap_DEPENDS=	net/php${PHP_VER}-ldap
 mbstring_DEPENDS=	converters/php${PHP_VER}-mbstring
 mcrypt_DEPENDS=	security/php${PHP_VER}-mcrypt
+.    if ${PHP_VER} >= 70
+memcache_DEPENDS=	databases/php${PHP_VER}-memcache
+.    else
 memcache_DEPENDS=	databases/pecl-memcache
-.if ${PHP_VER} == 70
-memcached_DEPENDS= databases/pecl-memcached-php7
-.else
-memcached_DEPENDS= databases/pecl-memcached
-.endif
-.if ${PHP_VER} == 70
-msgpack_DEPENDS= devel/pecl-msgpack-php7
-.else
-msgpack_DEPENDS= devel/pecl-msgpack-php5
-.endif
-mhash_DEPENDS=	security/php${PHP_VER}-mhash
+.    endif
+.    if ${PHP_VER} >= 70
+memcached_DEPENDS=	databases/pecl-memcached
+.    else
+memcached_DEPENDS=	databases/pecl-memcached2
+.    endif
 mssql_DEPENDS=	databases/php${PHP_VER}-mssql
 mysql_DEPENDS=	databases/php${PHP_VER}-mysql
 mysqli_DEPENDS=	databases/php${PHP_VER}-mysqli
@@ -383,7 +373,7 @@ pspell_DEPENDS=	textproc/php${PHP_VER}-pspell
 radius_DEPENDS=	net/pecl-radius
 readline_DEPENDS=	devel/php${PHP_VER}-readline
 recode_DEPENDS=	converters/php${PHP_VER}-recode
-redis_DEPENDS=	databases/php${PHP_VER}-redis
+redis_DEPENDS=	databases/pecl-redis
 session_DEPENDS=www/php${PHP_VER}-session
 shmop_DEPENDS=	devel/php${PHP_VER}-shmop
 simplexml_DEPENDS=	textproc/php${PHP_VER}-simplexml
@@ -418,7 +408,7 @@ BUILD_DEPENDS+=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/${extension:S/:build//}.so:${$
 RUN_DEPENDS+=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/${extension:S/:build//}.so:${${extension:S/:build//}_DEPENDS}
 .        endif
 .      else
-.        if ${ext:tl} != "yes"
+.        if ${ext:tl} != "yes" && !defined(_IGNORE_PHP_SET)
 check-makevars::
 			@${ECHO_CMD} "Unknown extension ${extension:S/:build//} for PHP ${PHP_VER}."
 			@${FALSE}
