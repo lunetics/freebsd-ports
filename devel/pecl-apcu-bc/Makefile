@@ -14,7 +14,7 @@ COMMENT=            APCu Backwards Compatibility Module for PHP7
 
 LICENSE=            PHP301
 
-BUILD_DEPENDS=      ${LOCALBASE}/lib/php/20151012/apcu.so:devel/pecl-APCu-php7
+BUILD_DEPENDS=      ${LOCALBASE}/lib/php/20151012/apcu.so:devel/pecl-APCu
 
 CONFLICTS=          pecl-APC-[0-9]*
 
