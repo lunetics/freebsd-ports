@@ -1,5 +1,5 @@
 # Created by: Torsten Zuehlsdorff <tz@FreeBSD.org>
-# $FreeBSD: head/lang/php71/Makefile 436329 2017-03-17 09:17:19Z tz $
+# $FreeBSD$
 
 PORTNAME=	php71
 PORTVERSION=	7.1.4
